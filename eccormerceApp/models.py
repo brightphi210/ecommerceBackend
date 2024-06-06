@@ -29,8 +29,27 @@ class ProductModel(models.Model):
         return self.name
     
 
-class OrderModel(models.Model):
-    pass 
-
 class OrderItemModel(models.Model):
-    pass
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, null=True, blank=True)
+    quantity = models.IntegerField(blank=True, null=True)
+    price = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return self.product.name
+
+class OrderModel(models.Model):
+    STATUS_CHOICES = [
+        ('processing', 'processing'),
+        ('intrasit', 'intrasit'),
+        ('delivered', 'delivered'),
+        ('declined', 'declined'),
+    ]
+    status = models.CharField(choices = STATUS_CHOICES, max_length=255, null=True, blank=True)
+    customer = models.ForeignKey(CustomerModel, on_delete=models.CASCADE, null=True, blank=True)
+    orderItems = models.ForeignKey(OrderItemModel, on_delete=models.CASCADE, null=True, blank=True)
+    order_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):
+        return self.orderItems.product.name
+
+

@@ -15,6 +15,7 @@ def endpoints(request):
         'api/products/' : 'Getting and Creating Products',
         'api/categories/' : 'Getting and Creating Categories',
         'api/orderItems/' : 'Getting and Creating OrderItems',
+        'api/orders/' : 'Getting and Creating Orders',
     }
     return Response(data)
 
@@ -27,3 +28,12 @@ class CategoryGetAndCreate(generics.ListCreateAPIView):
 class ProductGetAndCreate(generics.ListCreateAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductSerializer
+
+class OderItemGetAndCreate(generics.ListCreateAPIView):
+    queryset = OrderItemModel.objects.all()
+    serializer_class = OrderItemSerializer
+
+
+class OderGetAndCreate(generics.ListCreateAPIView):
+    queryset = OrderModel.objects.all()
+    serializer_class = OrderSerializer
