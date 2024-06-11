@@ -29,6 +29,11 @@ class ProductGetAndCreate(generics.ListCreateAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductSerializer
 
+class ProductGetANDUpdate(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProductModel.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
+
 class OderItemGetAndCreate(generics.ListCreateAPIView):
     queryset = OrderItemModel.objects.all()
     serializer_class = OrderItemSerializer
